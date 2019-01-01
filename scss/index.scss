@@ -1,0 +1,128 @@
+@import "_mixin.scss";
+@import "common.scss";
+.content {
+    width: 100%;
+    height: 100%;
+    @include box_flex;
+    @include direction(column);
+}
+
+header {
+    width: 100%;
+    height: pxTorem(50px);
+    padding: 0 pxTorem(15px);
+    font-size: pxTorem(18px);
+    border-bottom: 1px solid #ccc;
+    background: #000;
+    color: #fff;
+    @include sizing;
+    @include box_flex;
+    @include justify;
+    @include align;
+}
+
+section {
+    width: 100%;
+    @include flex;
+    padding: 0 pxTorem(15px);
+    @include sizing;
+    overflow-y: auto;
+    .box {
+        width: 100%;
+        height: pxTorem(80px);
+        margin: pxTorem(15px) 0;
+        border: 1px solid #666;
+        @include box_flex;
+        .left {
+            line-height: pxTorem(30px);
+            padding: 0 pxTorem(10px);
+            @include sizing;
+            @include flex;
+            @include box_flex;
+            @include direction(column);
+            @include justify;
+            p:nth-child(1) {
+                font-size: pxTorem(16px);
+            }
+        }
+        .right {
+            width: pxTorem(80px);
+            @include box_flex;
+            @include justify;
+            @include align;
+            .icon {
+                font-size: pxTorem(30px);
+            }
+        }
+    }
+}
+
+footer {
+    width: 100%;
+    height: pxTorem(44px);
+    background: yellowgreen;
+    color: #fff;
+    font-size: pxTorem(18px);
+    @include box_flex;
+    @include justify;
+    @include align;
+}
+
+.foot {
+    width: 100%;
+    height: 100%;
+    background: rgba($color: #000000, $alpha: .3);
+    position: absolute;
+    left: 0;
+    display: none;
+    top: 0;
+    .mask {
+        width: 100%;
+        height: 100%;
+        @include box_flex;
+        @include justify;
+        @include align;
+        .dl {
+            width: 80%;
+            height: pxTorem(150px);
+            background: #fff;
+            border-radius: pxTorem(18px);
+            padding: pxTorem(10px);
+            @include sizing;
+            @include box_flex;
+            @include direction(column);
+            @include align;
+            p {
+                width: 100%;
+                height: pxTorem(44px);
+                line-height: pxTorem(44px);
+                font-size: pxTorem(18px);
+                text-align: center;
+            }
+            .inp {
+                width: 100%;
+                height: pxTorem(40px);
+                background: #999;
+            }
+            div {
+                width: 100%;
+                @include flex;
+                margin-top: pxTorem(15px);
+                @include box_flex;
+                span {
+                    @include flex;
+                    @include box_flex;
+                    @include justify;
+                    @include align;
+                    border: 1px solid #ccc;
+                    height: pxTorem(30px);
+                    font-size: pxTorem(14px);
+                }
+            }
+        }
+    }
+}
+
+.active {
+    display: block;
+}

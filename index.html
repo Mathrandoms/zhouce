@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="fonts/iconfont.css">
+    <script src="./js/flexible.js"></script>
+</head>
+
+<body>
+    <div class="content">
+        <header>
+            <p>分类列表</p>
+        </header>
+        <section>
+            <div class="box">
+                <div class="left">
+                    <p><b>分类名称 :</b><span> 水果</span></p>
+                    <p>2018-12-29-22：55：32</p>
+                </div>
+                <div class="right">
+                    <i class="icon iconfont icon-bianji1"></i>
+                    <i class="icon iconfont icon-shanchu"></i>
+                </div>
+            </div>
+        </section>
+        <footer>
+            添加分类
+        </footer>
+        <div class="foot" id="foot">
+            <div class="mask">
+                <div class="dl">
+                    <p>填写分类名称</p>
+                    <input type="text" placeholder="填写分类名称" class="inp" id="inp">
+                    <div>
+                        <span id="del">取消</span>
+                        <span id="ok">确定</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        //获取添加的商品
+        var add = document.getElementsByTagName("footer")[0]
+        var xhr = new XMLHttpRequest()
+        xhr.onload = function(e) {
+            var obj = JSON.parse(e.target.responseText)
+            console.log(obj.data)
+            base(obj.data)
+        }
+        xhr.open("get", "/list", true)
+        xhr.send()
+
+        add.onclick = function() {
+            foot.classList.add("active")
+        }
+
+        del.onclick = function() {
+            foot.classList.remove("active")
+        }
+
+        ok.onclick = function() {
+            foot.classList.remove("active")
+            var xhrinp = new XMLHttpRequest()
+            xhrinp.onload = function(e) {
+                console.log(e.target.responseText)
+            }
+            xhrinp.open("get", "/datainp?name=" + inp.value + "&time=" + new Date(Date.now()).toLocaleDateString(), true)
+            xhrinp.send()
+        }
+
+
+
+        function base(data) {
+            var section = document.getElementsByTagName("section")[0]
+            var html = "";
+            data.forEach(function(item, index) {
+                html += `<div class="box">
+                <div class="left">
+                    <p><b>分类名称 :</b><span> ${item.name}</span></p>
+                    <p>${item.time}</p>
+                </div>
+                <div class="right">
+                    <i class="icon iconfont icon-bianji1"></i>
+                    <i class="icon iconfont icon-shanchu"></i>
+                </div>
+            </div>`
+            })
+            section.innerHTML = html
+        }
+    </script>
+</body>
+
+</html>
